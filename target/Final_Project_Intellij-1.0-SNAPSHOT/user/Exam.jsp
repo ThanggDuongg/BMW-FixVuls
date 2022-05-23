@@ -290,7 +290,7 @@ display: inline-block;
                                     </span>
                                     </p>
                                     <div style="display: flex; justify-content: space-between;">
-                                        <a href="<c:out value="/user-view-question?examID=${item.id}&type=practise&page=1&maxPageItem=5&sortName=questionNo&sortBy=asc"/>"
+                                        <a href="<c:out value="/user-view-question?examID=${item.id}&type=practise&page=1&maxPageItem=5&sortName=questionNo&sortBy=asc&csrf="/><%= csrfToken%>"
                                            type="button" class="btn btn-success"
                                            style="min-width: 110px;">Exam</a>
                                         <c:if test="${empty item.score}">
@@ -301,7 +301,7 @@ display: inline-block;
                                         </c:if>
                                         <c:if test="${not empty item.score}">
                                             <a type="button" class="btn btn-secondary" style="min-width: 110px;"
-                                               href="<c:out value="/user-view-question?examID=${item.id}&type=preview&page=1&maxPageItem=5&sortName=questionNo&sortBy=asc"/>">
+                                               href="<c:out value="/user-view-question?examID=${item.id}&type=preview&page=1&maxPageItem=5&sortName=questionNo&sortBy=asc&csrf="/><%= csrfToken%>">
                                                 Review
                                             </a>
                                         </c:if>

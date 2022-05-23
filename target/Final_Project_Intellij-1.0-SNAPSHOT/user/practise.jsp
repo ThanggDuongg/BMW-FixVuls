@@ -23,7 +23,7 @@
     <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" id="light-style">
     <link href="../assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
     <link rel="stylesheet" href="../assets/css/practise.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/vendor/jquery.twbsPagination.js"></script>
 
 </head>

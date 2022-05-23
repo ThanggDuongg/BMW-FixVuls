@@ -792,7 +792,7 @@
 <script src="../assets/js/TuViet/loadImage.js"></script>
 <script src="../assets/js/TuViet/notification.js"></script>
 <script src="../assets/js/sweetalert/sweetalert2.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     handle('.Add-course', '#course');
     // handle('.insert-file', '#file');
