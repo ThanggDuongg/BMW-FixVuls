@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="util.CSRFUtil" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,9 +46,20 @@
                             <h4 class="text-dark-50 text-center mt-0 fw-bold">Free Sign Up</h4>
                             <p class="text-muted mb-4">Don't have an account? Create your account, it takes less than a minute </p>
                         </div>
+                        <%
+                            // generate a random CSRF token
+                            String csrfToken = CSRFUtil.getToken();
+
+                            // place the CSRF token in a cookie
+                            javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie("csrfToken", csrfToken);
+                            response.setHeader("X-Content-Type-Options", "nosniff");
+                            //Cookie without SameSite Attribute
+                            response.setHeader("Set-Cookie", "key=value; HttpOnly; SameSite=Strict");
+                            response.addCookie(cookie);
+                        %>
 
                         <form action="/view-register" method="post">
-
+                            <input type="hidden" name="csrf" value="<%= csrfToken %>"/>
                             <c:if test="${not empty messageResponse}">
                                 <div class="alert alert-${alert} mb-3" role="alert">
                                         ${messageResponse}

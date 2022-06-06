@@ -18,10 +18,10 @@ public class FixCSRFController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Boolean check = CSRFUtil.doAction(request, response);
         if (check) {
-            response.sendRedirect(request.getContextPath()+"/admin-home");
+            return;
         }
         else {
-            return;
+            response.sendRedirect(request.getContextPath()+"/view-home");
         }
     }
 }

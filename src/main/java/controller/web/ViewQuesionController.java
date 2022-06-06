@@ -47,6 +47,31 @@ public class ViewQuesionController extends HttpServlet {
         if (!CSRFUtil.doAction(request, response)) {
             return;
         }
+        String examID = request.getParameter("examID");
+        String type = request.getParameter("type");
+        String page = request.getParameter("page");
+        String maxPageItem = request.getParameter("maxPageItem");
+        String sortName = request.getParameter("sortName");
+        String sortBy = request.getParameter("sortBy");
+        String csrf = request.getParameter("csrf");
+        if (examID.length() > 10 || type.length() > 10 || page.length() > 10 || maxPageItem.length() > 10 ||
+        sortName.length() > 10 || sortBy.length() > 10 || csrf.length() > 10) {
+            return;
+        }
+        boolean examID_val = examID.matches(".*[%<>&;'\0-].*");
+        boolean type_val = type.matches(".*[%<>&;'\0-].*");
+        boolean page_val = page.matches(".*[%<>&;'\0-].*");
+        boolean maxPageItem_val = maxPageItem.matches(".*[%<>&;'\0-].*");
+        boolean sortName_val = sortName.matches(".*[%<>&;'\0-].*");
+        boolean sortBy_val = sortBy.matches(".*[%<>&;'\0-].*");
+        boolean csrf_val = csrf.matches(".*[%<>&;'\0-].*");
+
+        if (examID_val || type_val || page_val || maxPageItem_val || sortName_val || sortBy_val || csrf_val) {
+//            RequestDispatcher rd = request.getRequestDispatcher("/home/login.jsp");
+//            rd.forward(request, response);
+            return;
+        }
+
         if (SessionUtil.getInstance().getValue(request, "LISTQUESTION") != null) {
             SessionUtil.getInstance().removeValue(request, "LISTQUESTION");
             SessionUtil.getInstance().removeValue(request, "LISTCURRENTQUESTION");

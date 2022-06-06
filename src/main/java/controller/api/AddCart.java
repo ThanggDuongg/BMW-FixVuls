@@ -37,6 +37,12 @@ public class AddCart extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
+        String id = request.getParameter("id");
+        String price = request.getParameter("price");
+        if (id.length() > 10 || price.length() > 25) {
+            return;
+        }
+
         ManagerCourseDTO managerCourseDTO  =  HttpUtil.of(request.getReader()).toModel(ManagerCourseDTO.class);
 
         managerCourseDTO = iManagerCourseService.findById(managerCourseDTO.getId());

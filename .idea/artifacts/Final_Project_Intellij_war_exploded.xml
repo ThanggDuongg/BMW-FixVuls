@@ -14,6 +14,18 @@
           <element id="module-output" name="Final_Project_Intellij" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-catalina:9.0.62" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-servlet-api:9.0.62" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-jsp-api:9.0.62" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-el-api:9.0.62" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-juli:9.0.62" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-annotations-api:9.0.62" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-api:9.0.62" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-jni:9.0.62" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-coyote:9.0.62" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-util:9.0.62" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-util-scan:9.0.62" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-jaspic-api:9.0.62" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: org.postgresql:postgresql:42.2.23" />
           <element id="library" level="project" name="Maven: org.checkerframework:checker-qual:3.5.0" />

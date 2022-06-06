@@ -31,7 +31,11 @@ public class ExamUser extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        Integer courseId = Integer.parseInt(request.getParameter("courseId"));
+        String temp = request.getParameter("courseId");
+        if (temp.length() > 10) {
+            return;
+        }
+        Integer courseId = Integer.parseInt(temp);
         List<ExamDTO> examDTOS = iExamService.findAllQuestionsByCourseID(courseId);
         if(examDTOS == null){
             response.sendRedirect(request.getContextPath() + "/user-home");

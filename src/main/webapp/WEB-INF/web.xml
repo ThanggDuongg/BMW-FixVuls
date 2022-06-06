@@ -21,12 +21,15 @@
     <filter>
         <filter-name>servletFilter</filter-name>
         <filter-class>filter.AuthorizationFilter</filter-class>
+<!--        X-Content-Type-Options-->
+<!--        <filter-name>HeaderSecurityFilter</filter-name>-->
+        <filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter</filter-class>
     </filter>
     <session-config>
         <tracking-mode>COOKIE</tracking-mode>
         <!--        Fix cookies-->
         <cookie-config>
-            <secure>true</secure>
+            <secure>true</secure>-
             <http-only>true</http-only>
         </cookie-config>
     </session-config>

@@ -24,7 +24,11 @@ public class DocumentController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
-        Integer courseID=Integer.parseInt(req.getParameter("courseID"));
+        String temp = req.getParameter("courseID");
+        if (temp.length() > 10) {
+            return;
+        }
+        Integer courseID=Integer.parseInt(temp);
         AccountDTO accountDTO = (AccountDTO) SessionUtil.getInstance().getValue(req,"USERMODEL");
         req.setAttribute("account", accountDTO);
         List<Document> listDocument = documentService.getAllDocumentsByCourseID(courseID);

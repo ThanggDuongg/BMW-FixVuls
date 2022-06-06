@@ -37,8 +37,9 @@ public class HomeController extends HttpServlet {
                 if (message != null && alert != null) {
 //                    request.setAttribute("message", resourceBundle.getString(message));
                     boolean validate_alert = alert.matches(".*[%<>&;'\0-].*");
+                    boolean mess_val = message.matches(".*[%<>&;'\0-].*");
                     System.out.print(">> boolean: " + validate_alert);
-                    if (validate_alert) {
+                    if (validate_alert || mess_val) {
                         alert = "danger";
                         request.setAttribute("message", resourceBundle.getString("attack_xss"));
                     }
@@ -74,7 +75,14 @@ public class HomeController extends HttpServlet {
         String action = request.getParameter("action");
         if (action != null && action.equals("login")) {
             if (!CSRFUtil.doAction(request, response)) {
-//                return;
+                return;
+            }
+            String username = request.getParameter("username");
+            String password = request.getParameter("pass");
+            boolean user_val = username.matches(".*[%<>&;'\0-].*");
+            boolean pass_val = password.matches(".*[%<>&;'\0-].*");
+            if (user_val || pass_val) {
+                return;
             }
             AccountDTO accountDTO = FormUtil.toModel(AccountDTO.class, request);
             accountDTO = accountService.findByUsernamePassword(accountDTO.getUsername(), accountDTO.getPass());

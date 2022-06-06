@@ -36,7 +36,17 @@ public class ManagerFileAdmin extends HttpServlet {
         List<Exam> listExam = examService.getListExam();
         List<Document> listDocument=documentService.getListDocument();
         String message = request.getParameter("message");
+        if (message.length() > 15) {
+            response.sendRedirect(request.getContextPath()+"/admin-manager-file?message=buffer_overflow");
+            return;
+        }
         if(message != null){
+            boolean validate_alert = message.matches(".*[%<>&;'\0-].*");
+            System.out.print(">> boolean: " + validate_alert);
+            if (validate_alert) {
+                response.sendRedirect(request.getContextPath()+"/admin-manager-file?message=attack_xss");
+                return;
+            }
             MessageUtil.showMessage(request);
         }
         request.setAttribute("list",listCourse);
@@ -53,6 +63,14 @@ public class ManagerFileAdmin extends HttpServlet {
         String action = request.getParameter("action");
         if (!CSRFUtil.doAction(request, response)) {
             return;
+        }
+        String message = request.getParameter("message");
+        if (message != null && !message.isEmpty()) {
+            boolean validate_alert = message.matches(".*[%<>&;'\0-].*");
+            System.out.print(">> boolean: " + validate_alert);
+            if (validate_alert) {
+                response.sendRedirect(request.getContextPath()+"/admin-manager-file?message=attack_xss");
+            }
         }
         if(action.equals("insertCourse")){
             ManagerCourseDTO courseDTO = FormUtil.toModel(ManagerCourseDTO.class, request);

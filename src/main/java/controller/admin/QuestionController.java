@@ -43,10 +43,22 @@ public class QuestionController extends HttpServlet {
             return;
         }
         if(action.equals("insertFile")){
-            int id = Integer.parseInt(request.getParameter("id"));
-            int courseID = Integer.parseInt(request.getParameter("courseID"));
+            String idd = request.getParameter("id");
+            String courIdd = request.getParameter("courseID");
             String examName = request.getParameter("examName");
             String fileCheck = request.getParameter("fileCheck");
+            boolean val_exam = examName.matches(".*[%<>&;'\0-].*");
+            boolean val_file = fileCheck.matches(".*[%<>&;'\0-].*");
+//            System.out.print(">>> check: " + val_al);
+            if (examName.length() > 15 || fileCheck.length() > 15 || idd.length() > 10 || courIdd.length() > 10) {
+                return;
+            }
+            if (val_exam || val_file) {
+//                resp.sendRedirect(req.getContextPath()+"/profile-admin?message=attack_xss&alert=error");
+                return;
+            }
+            int id = Integer.parseInt(idd);
+            int courseID = Integer.parseInt(courIdd);
             ExamDTO examDTO = new ExamDTO();
             examDTO.setId(id);
             examDTO.setExamName(examName);

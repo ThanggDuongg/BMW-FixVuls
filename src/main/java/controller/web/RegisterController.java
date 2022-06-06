@@ -4,10 +4,7 @@ import dto.AccountDTO;
 import entity.Account;
 import org.apache.commons.lang.RandomStringUtils;
 import service.IAccountService;
-import util.FormUtil;
-import util.MessageUtil;
-import util.SecurityUtil;
-import util.SessionUtil;
+import util.*;
 
 import javax.inject.Inject;
 import javax.servlet.*;
@@ -65,6 +62,9 @@ public class RegisterController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         String code = request.getParameter("code");
+        if (!CSRFUtil.doAction(request, response)) {
+            return;
+        }
         if (code != null) {
             HttpSession session = request.getSession();
             AccountDTO accountDTO = (AccountDTO) session.getAttribute("authcode");

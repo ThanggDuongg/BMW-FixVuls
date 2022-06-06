@@ -1,4 +1,4 @@
-<%--
+<%@ page import="util.CSRFUtil" %><%--
   Created by IntelliJ IDEA.
   User: ACER
   Date: 10/21/2021
@@ -60,8 +60,19 @@
                             <h4 class="text-dark-50 text-center mt-0 fw-bold">Reset Password</h4>
                             <p class="text-muted mb-4">Enter your email address and we'll send you an email with instructions to reset your password.</p>
                         </div>
+                        <%
+                            // generate a random CSRF token
+                            String csrfToken = CSRFUtil.getToken();
 
+                            // place the CSRF token in a cookie
+                            javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie("csrfToken", csrfToken);
+                            response.setHeader("X-Content-Type-Options", "nosniff");
+                            //Cookie without SameSite Attribute
+                            response.setHeader("Set-Cookie", "key=value; HttpOnly; SameSite=Strict");
+                            response.addCookie(cookie);
+                        %>
                         <form action="/recover-password" method="post">
+                            <input type="hidden" name="csrf" value="<%= csrfToken %>"/>
                             <div class="mb-3">
                                 <label for="emailaddress" class="form-label">Email address</label>
                                 <input name="email" class="form-control" type="email" id="emailaddress" required="" placeholder="Enter your email">

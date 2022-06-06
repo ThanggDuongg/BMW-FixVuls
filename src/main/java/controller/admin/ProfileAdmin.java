@@ -31,11 +31,25 @@ public class ProfileAdmin extends HttpServlet {
         if (accountDTO != null && accountDTO.getRoleid() == 1) {
             String action = req.getParameter("action");
             String message = req.getParameter("message");
+            if (action.length() > 20 || message.length() > 20) {
+                return;
+            }
             String alert = req.getParameter("alert");
+
+            if (alert.length() > 10) {
+                return;
+            }
 
             if (action != null) {
 
             } else if (message != null && alert != null) {
+                boolean val_al = alert.matches(".*[%<>&;'\0-].*");
+                boolean val_mes = message.matches(".*[%<>&;'\0-].*");
+                System.out.print(">>> check: " + val_al);
+                if (val_al || val_mes) {
+                    resp.sendRedirect(req.getContextPath()+"/profile-admin?message=attack_xss&alert=error");
+                    return;
+                }
                 System.out.println(resourceBundle.getString(message));
                 System.out.println(alert);
                 req.setAttribute("message", resourceBundle.getString(message));

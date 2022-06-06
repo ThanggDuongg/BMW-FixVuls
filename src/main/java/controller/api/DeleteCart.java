@@ -19,7 +19,11 @@ public class DeleteCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        Integer courseId = Integer.valueOf(request.getParameter("itemDelete"));
+        String test = request.getParameter("itemDelete");
+        if (test.length() > 10) {
+            return;
+        }
+        Integer courseId = Integer.valueOf(test);
 
         List<ManagerCourseDTO> cart = (List<ManagerCourseDTO>) SessionUtil.getInstance().getValue(request, "CARTKEY");
 

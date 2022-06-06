@@ -38,6 +38,13 @@ public class ProfileUser extends HttpServlet {
             if (action != null) {
 
             } else if (message != null && alert != null) {
+                boolean val_al = alert.matches(".*[%<>&;'\0-].*");
+                boolean val_mes = message.matches(".*[%<>&;'\0-].*");
+                System.out.print(">>> check: " + val_al);
+                if (val_al || val_mes) {
+                    resp.sendRedirect(req.getContextPath()+"/profile-user?message=attack_xss&alert=error");
+                    return;
+                }
                 System.out.println(resourceBundle.getString(message));
                 System.out.println(alert);
                 req.setAttribute("message", resourceBundle.getString(message));
@@ -62,6 +69,20 @@ public class ProfileUser extends HttpServlet {
         if (!CSRFUtil.doAction(req, resp)) {
             resp.sendRedirect(req.getContextPath()+"/profile-user?message=Absence_of_Anti-CSRF_Tokens&alert=error");
         }
+        String alert = req.getParameter("alert");
+        String message = req.getParameter("message");
+
+        System.out.print(">>> check: " + alert);
+
+        System.out.print(">>> check: " + message);
+        if ((alert != null && !alert.isEmpty()) || (message != null && !message.isEmpty())) {
+            boolean val_al = alert.matches(".*[%<>&;'\0-].*");
+            boolean val_mes = alert.matches(".*[%<>&;'\0-].*");
+            System.out.print(">>> check: " + val_al);
+            if (val_al || val_mes) {
+                resp.sendRedirect(req.getContextPath()+"/profile-user?message=attack_xss&alert=error");
+            }
+        }
 
         if (action != null && action.equals("update-avatar")) {
             AccountDTO accountDTO= (AccountDTO) SessionUtil.getInstance().getValue(req, "USERMODEL");
@@ -75,12 +96,25 @@ public class ProfileUser extends HttpServlet {
         } else if (action != null &&  action.equals("update-info")) {
             AccountDTO accountDTO = (AccountDTO) SessionUtil.getInstance().getValue(req, "USERMODEL");
             System.out.println(accountDTO);
-            accountDTO.setFullname(req.getParameter("fullname"));
-            accountDTO.setBirthday(LocalDate.parse(req.getParameter("birthday"),
+
+            String fullname = req.getParameter("fullname");
+            String birthday = req.getParameter("birthday");
+            String gender = req.getParameter("gender");
+            String phone = req.getParameter("phone");
+            String email = req.getParameter("email");
+
+            if (fullname.length() > 20 || birthday.length() > 15 || gender.length() > 7 ||
+            phone.length() > 20 || email.length() > 20) {
+                resp.sendRedirect(req.getContextPath()+"/profile-user?message=buffer_overflow&alert=error");
+                return;
+            }
+
+            accountDTO.setFullname(fullname);
+            accountDTO.setBirthday(LocalDate.parse(birthday,
                     DateTimeFormatter.ofPattern("MM/dd/yyyy")));
-            accountDTO.setGender(req.getParameter("gender"));
-            accountDTO.setPhone(req.getParameter("phone"));
-            accountDTO.setEmail(req.getParameter("email"));
+            accountDTO.setGender(gender);
+            accountDTO.setPhone(phone);
+            accountDTO.setEmail(email);
             if (accountService.updateAccount(accountDTO) != null) {
                 resp.sendRedirect(req.getContextPath()+"/profile-user?message=changed_information_successfully&alert=success");
             } else {

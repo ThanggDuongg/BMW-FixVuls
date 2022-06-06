@@ -1,6 +1,7 @@
 package controller.web;
 
 import service.impl.AccountService;
+import util.CSRFUtil;
 import util.EmailUtil;
 import util.SecurityUtil;
 
@@ -63,6 +64,9 @@ public class RecoverPasswordController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         String action = req.getParameter("action");
+        if (!CSRFUtil.doAction(req, resp)) {
+            return;
+        }
         if (action != null && action.equals("recover")) {
             String email = req.getParameter("email");
             accountService = new AccountService();

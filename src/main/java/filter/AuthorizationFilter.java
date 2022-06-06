@@ -39,7 +39,8 @@ public class AuthorizationFilter implements Filter {
 //        }
         //overwriting the cookie with Secure attribute set
 //        ((HttpServletResponse)response).setHeader("Set-Cookie", "JSESSIONID=" + ((HttpServletRequest)request).getSession().getId() + ";Path=/");
-
+//        response.setHeader("Content")
+//        response.setHeader("Con");
         //Missing Anti-clickjacking Header
         response.addHeader("X-Frame-Options", "DENY");
         //X-Content-Type-Options Header Missing
