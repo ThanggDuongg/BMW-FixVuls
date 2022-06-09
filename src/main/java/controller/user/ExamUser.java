@@ -32,7 +32,7 @@ public class ExamUser extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         String temp = request.getParameter("courseId");
-        if (temp.length() > 10) {
+        if (temp.length() > 60) {
             return;
         }
         Integer courseId = Integer.parseInt(temp);

@@ -50,7 +50,7 @@ public class QuestionController extends HttpServlet {
             boolean val_exam = examName.matches(".*[%<>&;'\0-].*");
             boolean val_file = fileCheck.matches(".*[%<>&;'\0-].*");
 //            System.out.print(">>> check: " + val_al);
-            if (examName.length() > 15 || fileCheck.length() > 15 || idd.length() > 10 || courIdd.length() > 10) {
+            if (examName.length() > 20 || fileCheck.length() > 30 || idd.length() > 20 || courIdd.length() > 20) {
                 return;
             }
             if (val_exam || val_file) {

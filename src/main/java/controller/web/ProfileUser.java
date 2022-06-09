@@ -104,7 +104,7 @@ public class ProfileUser extends HttpServlet {
             String email = req.getParameter("email");
 
             if (fullname.length() > 20 || birthday.length() > 15 || gender.length() > 7 ||
-            phone.length() > 20 || email.length() > 20) {
+            phone.length() > 20) {
                 resp.sendRedirect(req.getContextPath()+"/profile-user?message=buffer_overflow&alert=error");
                 return;
             }

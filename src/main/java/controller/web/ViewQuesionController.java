@@ -54,8 +54,8 @@ public class ViewQuesionController extends HttpServlet {
         String sortName = request.getParameter("sortName");
         String sortBy = request.getParameter("sortBy");
         String csrf = request.getParameter("csrf");
-        if (examID.length() > 10 || type.length() > 10 || page.length() > 10 || maxPageItem.length() > 10 ||
-        sortName.length() > 10 || sortBy.length() > 10 || csrf.length() > 10) {
+        if (examID.length() > 10 || type.length() > 20 || page.length() > 10 || maxPageItem.length() > 10 ||
+        sortName.length() > 20 || sortBy.length() > 10 || csrf.length() > 27) {
             return;
         }
         boolean examID_val = examID.matches(".*[%<>&;'\0-].*");

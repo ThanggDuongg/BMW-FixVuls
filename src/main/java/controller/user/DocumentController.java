@@ -25,7 +25,7 @@ public class DocumentController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         String temp = req.getParameter("courseID");
-        if (temp.length() > 10) {
+        if (temp.length() > 60) {
             return;
         }
         Integer courseID=Integer.parseInt(temp);
