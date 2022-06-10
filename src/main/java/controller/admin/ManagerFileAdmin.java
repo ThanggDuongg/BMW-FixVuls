@@ -36,7 +36,7 @@ public class ManagerFileAdmin extends HttpServlet {
         List<Exam> listExam = examService.getListExam();
         List<Document> listDocument=documentService.getListDocument();
         String message = request.getParameter("message");
-        if (message.length() > 60) {
+        if (message != null && message.length() > 61) {
             response.sendRedirect(request.getContextPath()+"/admin-manager-file?message=buffer_overflow");
             return;
         }
