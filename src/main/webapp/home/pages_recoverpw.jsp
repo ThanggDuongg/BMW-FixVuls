@@ -69,6 +69,8 @@
                             response.setHeader("X-Content-Type-Options", "nosniff");
                             //Cookie without SameSite Attribute
                             response.setHeader("Set-Cookie", "key=value; HttpOnly; SameSite=Strict");
+                            cookie.setHttpOnly(true);
+                            cookie.setSecure(true);
                             response.addCookie(cookie);
                         %>
                         <form action="/recover-password" method="post">

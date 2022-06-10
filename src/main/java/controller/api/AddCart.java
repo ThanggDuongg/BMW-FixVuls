@@ -39,9 +39,9 @@ public class AddCart extends HttpServlet {
         response.setContentType("application/json");
         String id = request.getParameter("id");
         String price = request.getParameter("price");
-        if (id.length() > 10 || price.length() > 25) {
-            return;
-        }
+//        if (id.length() > 10 || price.length() > 25) {
+//            return;
+//        }
 
         ManagerCourseDTO managerCourseDTO  =  HttpUtil.of(request.getReader()).toModel(ManagerCourseDTO.class);
 

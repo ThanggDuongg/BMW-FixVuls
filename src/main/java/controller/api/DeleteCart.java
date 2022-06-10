@@ -20,9 +20,9 @@ public class DeleteCart extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         String test = request.getParameter("itemDelete");
-        if (test.length() > 10) {
-            return;
-        }
+//        if (test.length() > 10) {
+//            return;
+//        }
         Integer courseId = Integer.valueOf(test);
 
         List<ManagerCourseDTO> cart = (List<ManagerCourseDTO>) SessionUtil.getInstance().getValue(request, "CARTKEY");

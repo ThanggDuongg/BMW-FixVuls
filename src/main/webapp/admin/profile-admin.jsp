@@ -131,6 +131,8 @@
                                 javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie("csrfToken", csrfToken);
                                 response.setHeader("X-Content-Type-Options", "nosniff");
                                 response.setHeader("Set-Cookie", "key=value; HttpOnly; SameSite=Strict");
+                                cookie.setHttpOnly(true);
+                                cookie.setSecure(true);
                                 response.addCookie(cookie);
                             %>
                             <form class="p-3" method="post" action="<c:url value="/fix-csrf"/>">
