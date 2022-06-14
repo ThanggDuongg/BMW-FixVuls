@@ -88,11 +88,14 @@
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <div class="input-group input-group-merge">
-                                    <input type="password" id="password" name="pass" class="form-control" placeholder="Enter your password">
+                                    <input type="password" id="password" name="pass" class="form-control" placeholder="Enter your password"
+                                        onkeyup="validate()" onchange="validate()" onclick="validate()"
+                                    >
                                     <div class="input-group-text" data-password="false">
                                         <span class="password-eye"></span>
                                     </div>
                                 </div>
+                                <span style="color: red; font-size: 9px" id="temp"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="confirm-password" class="form-label">Confirm Password</label>
@@ -111,7 +114,7 @@
                             </div>
 
                             <div class="mb-3 text-center">
-                                <button class="btn btn-primary" type="submit"> Sign Up </button>
+                                <button id="submit" class="btn btn-primary" type="submit"> Sign Up </button>
                             </div>
 
                         </form>
@@ -143,6 +146,52 @@
 
 <script src="<c:url value = "../assets/js/vendor.min.js"/>"></script>
 <script src="<c:url value = "../assets/js/app.min.js"/>"></script>
+<script>
+    function validate() {
+        var format = /[!@#$%^&*()_+\-=\[\]{}:\\|,.<>\/?]+/;
+        var formatAlphabetCap = /[ABCDEFGHIJKLMNOPQRSTUVWXYZ]+/;
+        var formatAlphabet = /[abcdefghijklmnopqrstuvwxyz]+/;
+        var formatNumber = /[1234567890]+/;
+        var pw = document.getElementById("password").value;
+
+        if (pw == "") {
+            document.getElementById("temp").innerHTML = "Invalid!!";
+            document.getElementById("submit").disabled = true;
+            document.getElementById("submit").style.cursor = "not-allowed"
+        }
+        else if (pw.length < 8 || pw.length > 16) {
+            document.getElementById("temp").innerHTML = "Min length: 8 & Max length: 16";
+            document.getElementById("submit").disabled = true;
+            document.getElementById("submit").style.cursor = "not-allowed"
+        }
+        else if (formatNumber.test(pw) == false) {
+            document.getElementById("temp").innerHTML = "Can it nhat 1 chu so";
+            document.getElementById("submit").disabled = true;
+            document.getElementById("submit").style.cursor = "not-allowed"
+        }
+        else if (formatAlphabet.test(pw) == false) {
+            document.getElementById("temp").innerHTML = "Can ton tai mot ki tu a-z";
+            document.getElementById("submit").disabled = true;
+            document.getElementById("submit").style.cursor = "not-allowed"
+        }
+        else if (formatAlphabetCap.test(pw) == false) {
+            document.getElementById("temp").innerHTML = "Can ton tai mot ki tu A-Z";
+            document.getElementById("submit").disabled = true;
+            document.getElementById("submit").style.cursor = "not-allowed"
+        }
+        else if (format.test(pw) == false) {
+            document.getElementById("temp").innerHTML = "Can ton tai mot ki tu dac biet";
+            document.getElementById("submit").disabled = true;
+            document.getElementById("submit").style.cursor = "not-allowed"
+        }
+        else {
+            document.getElementById("temp").innerHTML = "correct";
+            document.getElementById("temp").style.color = "green"
+            document.getElementById("submit").disabled = false;
+            document.getElementById("submit").style.cursor = "pointer"
+        }
+    }
+</script>
 
 </body>
 </html>

@@ -200,6 +200,7 @@
                                 response.setHeader("Set-Cookie", "key=value; HttpOnly; SameSite=Strict");
                                 cookie.setHttpOnly(true);
                                 cookie.setSecure(true);
+//                                cookie.setComment();
                                 response.addCookie(cookie);
                             %>
                             <form class="p-3" action="<c:url value="/fix-csrf"/>" method="post">

@@ -31,14 +31,14 @@ public class ProfileAdmin extends HttpServlet {
         if (accountDTO != null && accountDTO.getRoleid() == 1) {
             String action = req.getParameter("action");
             String message = req.getParameter("message");
-            if (action.length() > 60 || message.length() > 60) {
-                return;
-            }
+//            if (action.length() > 60 || message.length() > 60) {
+//                return;
+//            }
             String alert = req.getParameter("alert");
 
-            if (alert.length() > 60) {
-                return;
-            }
+//            if (alert.length() > 60) {
+//                return;
+//            }
 
             if (action != null) {
 

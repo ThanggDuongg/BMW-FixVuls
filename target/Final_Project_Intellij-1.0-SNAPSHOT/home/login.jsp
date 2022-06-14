@@ -76,7 +76,9 @@
                                 <a href="<c:url value = "/recover-password"/>" class="text-muted float-end"><small>Forgot your password?</small></a>
                                 <label for="password" class="form-label">Password</label>
                                 <div class="input-group input-group-merge">
-                                    <input type="password" id="password" class="form-control" placeholder="Enter your password" name="pass">
+                                    <input type="password" id="password" class="form-control" placeholder="Enter your password" name="pass"
+
+                                    >
                                     <div class="input-group-text" data-password="false">
                                         <span class="password-eye"></span>
                                     </div>
@@ -91,7 +93,7 @@
                             </div>
                             <input type="hidden" name="action" value="login">
                             <div class="mb-3 mb-0 text-center">
-                                <button class="btn btn-primary" type="submit"> Log In </button>
+                                <button id="submit" class="btn btn-primary" type="submit"> Log In </button>
                             </div>
 
                         </form>
@@ -119,9 +121,9 @@
 </footer>
 
 <!-- bundle -->
-
 <script src="<c:url value = "../assets/js/vendor.min.js"/>"></script>
 <script src="<c:url value = "../assets/js/app.min.js"/>"></script>
+
 
 </body>
 </html>
